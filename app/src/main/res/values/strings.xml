@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">HiddenBeyondOfficial</string>
+
+    <string-array name="category">
+        <item>Documentary</item>
+        <item>Legend</item>
+        <item>Movie</item>
+    </string-array>
+</resources>

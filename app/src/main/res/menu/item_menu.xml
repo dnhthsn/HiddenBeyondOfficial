@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_tab"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/video_tab"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_video_library_24"
+        android:title="Videos" />
+
+    <item
+        android:id="@+id/news_tab"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_auto_stories_24"
+        android:title="News" />
+
+    <item
+        android:id="@+id/search_video_tab"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_youtube_searched_for_24"
+        android:title="Search Videos" />
+
+    <item
+        android:id="@+id/search_news_tab"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="Search News" />
+
+</menu>

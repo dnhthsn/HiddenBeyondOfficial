@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1024285058514",
+    "project_id": "hiddenbeyondofficial",
+    "storage_bucket": "hiddenbeyondofficial.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1024285058514:android:102dda42abb5095c3fd40b",
+        "android_client_info": {
+          "package_name": "com.example.hiddenbeyondofficial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1024285058514-66ps3i5sivhkapd5uc9f9d48uq5brkqg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hiddenbeyondofficial",
+            "certificate_hash": "81b026dfdfc962758c30e8ed5f3227d7a0d5aeb1"
+          }
+        },
+        {
+          "client_id": "1024285058514-fast9791hssl30a7ltuse43gbmlevahp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhGmGJTAwX8Qcauo6H8pUSdZ6jmnhYa34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1024285058514-fast9791hssl30a7ltuse43gbmlevahp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
