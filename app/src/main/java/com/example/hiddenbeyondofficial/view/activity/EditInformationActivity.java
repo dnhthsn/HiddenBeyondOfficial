@@ -43,7 +43,7 @@ public class EditInformationActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        if (bundle != null){
+        if (bundle != null) {
             binding.inputName.setText(bundle.getString(Const.Sender.name));
             binding.inputPassword.setText(bundle.getString(Const.Sender.password));
             binding.inputPhone.setText(bundle.getString(Const.Sender.phone));
@@ -61,21 +61,7 @@ public class EditInformationActivity extends AppCompatActivity {
             int genderGrID = binding.genderGroup.getCheckedRadioButtonId();
             RadioButton genderRad = findViewById(genderGrID);
             String gender = genderRad.getText().toString();
-
-            if (TextUtils.isEmpty(name)) {
-                Utility.Notice.snack(view, Const.Error.name);
-            } else if (TextUtils.isEmpty(phone)) {
-                Utility.Notice.snack(view, Const.Error.phone);
-            } else if (TextUtils.isEmpty(password)) {
-                Utility.Notice.snack(view, Const.Error.password);
-            } else if (TextUtils.isEmpty(address)) {
-                Utility.Notice.snack(view, Const.Error.address);
-            } else {
-                Users users = new Users(name, phone, password, address, gender);
-                userViewModel.updateUser(users);
-                LoginActivity.starter(EditInformationActivity.this);
-                Utility.Notice.snack(view, Const.Success.update);
-            }
+            userViewModel.updateUser(name, phone, password, address, gender, view);
         });
     }
 }

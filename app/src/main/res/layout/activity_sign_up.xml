@@ -23,7 +23,7 @@
             android:id="@+id/image_login"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:background="@color/black"
+            android:background="@drawable/round_corner_image"
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <pl.droidsonroids.gif.GifImageView

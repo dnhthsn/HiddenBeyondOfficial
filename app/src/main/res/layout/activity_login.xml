@@ -6,7 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey"
+        android:background="@color/black"
         tools:context=".view.activity.LoginActivity">
 
         <ImageView
@@ -30,14 +30,14 @@
         <LinearLayout
             android:id="@+id/linear_login"
             android:layout_width="350dp"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/round_corner_white"
             android:orientation="vertical"
             android:padding="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/logo_gif">
 
             <TextView
                 android:id="@+id/title_login"
@@ -61,7 +61,7 @@
                 android:id="@+id/input_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:hint="Enter your user name..." />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -127,11 +127,65 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="Create Account"
+            android:textColor="@color/white"
             android:textSize="15dp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/click_login" />
+
+        <View
+            android:layout_width="80dp"
+            android:layout_height="1dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/other_methods"
+            app:layout_constraintRight_toLeftOf="@id/other_methods"
+            app:layout_constraintTop_toTopOf="@id/other_methods" />
+
+        <TextView
+            android:id="@+id/other_methods"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Other login methods"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/create_account" />
+
+        <View
+            android:layout_width="80dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/other_methods"
+            app:layout_constraintLeft_toRightOf="@id/other_methods"
+            app:layout_constraintTop_toTopOf="@id/other_methods" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/other_methods">
+
+            <ImageView
+                android:id="@+id/login_facebook"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/icon_facebook" />
+
+            <ImageView
+                android:id="@+id/login_google"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/icon_google" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/login_admin"
@@ -139,6 +193,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:text="Login as Admin"
+            android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

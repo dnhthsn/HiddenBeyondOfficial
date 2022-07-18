@@ -59,19 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
                 RadioButton genderRad = findViewById(genderGrID);
                 String gender = genderRad.getText().toString();
 
-                if (TextUtils.isEmpty(name)) {
-                    Utility.Notice.snack(view, Const.Error.name);
-                } else if (TextUtils.isEmpty(phone)) {
-                    Utility.Notice.snack(view, Const.Error.phone);
-                } else if (TextUtils.isEmpty(password)) {
-                    Utility.Notice.snack(view, Const.Error.password);
-                } else if (TextUtils.isEmpty(address)) {
-                    Utility.Notice.snack(view, Const.Error.address);
-                } else {
-                    Users users = new Users(name, phone, password, address, gender);
-                    userViewModel.addUser(users, view);
-                    LoginActivity.starter(SignUpActivity.this);
-                }
+                userViewModel.addUser(name, phone, password, address, gender, view);
             }
         });
     }

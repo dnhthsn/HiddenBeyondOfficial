@@ -13,6 +13,7 @@ import com.example.hiddenbeyondofficial.model.Users;
 import com.example.hiddenbeyondofficial.model.Videos;
 import com.example.hiddenbeyondofficial.util.Const;
 import com.example.hiddenbeyondofficial.util.Utility;
+import com.example.hiddenbeyondofficial.view.activity.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -134,7 +135,7 @@ public class Repository {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Utility.Notice.snack(view, Const.Success.created);
+                                LoginActivity.starter(view.getContext());
                             } else {
                                 Utility.Notice.snack(view, Const.Error.network);
                             }

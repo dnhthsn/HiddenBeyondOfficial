@@ -16,6 +16,11 @@ import com.example.hiddenbeyondofficial.control.local.SharedPreference;
 import com.example.hiddenbeyondofficial.databinding.ActivityInformationBinding;
 import com.example.hiddenbeyondofficial.model.Users;
 import com.example.hiddenbeyondofficial.util.Const;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class InformationActivity extends AppCompatActivity {
     private SharedPreference sharedPreference;
@@ -69,11 +74,33 @@ public class InformationActivity extends AppCompatActivity {
             }
         });
 
+        GoogleSignInOptions gso = new GoogleSignInOptions.
+                Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).
+                build();
+
+        GoogleSignInClient googleSignInClient= GoogleSignIn.getClient(InformationActivity.this,gso);
+
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null){
+            String name = account.getDisplayName();
+            String mail = account.getEmail();
+
+            binding.userName.setText("Name: " + name);
+            binding.password.setText("");
+            binding.phoneNumber.setText("Email: " + mail);
+            binding.address.setText("");
+            binding.gender.setText("");
+            binding.editInfor.setVisibility(View.INVISIBLE);
+        }
+
         binding.logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginActivity.starter(InformationActivity.this);
                 finish();
+                LoginActivity.starter(InformationActivity.this);
+
+
+                googleSignInClient.signOut();
             }
         });
     }

@@ -53,13 +53,8 @@ public class LoginAdminActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String name = binding.inputName.getText().toString();
                 String password = binding.inputPassword.getText().toString();
-                if (TextUtils.isEmpty(name)) {
-                    Utility.Notice.snack(view, Const.Error.name);
-                } else if (TextUtils.isEmpty(password)) {
-                    Utility.Notice.snack(view, Const.Error.password);
-                } else {
-                    adminViewModel.checkAdmin(name, password, LoginAdminActivity.this);
-                }
+
+                adminViewModel.checkAdmin(name, password, view);
             }
         });
     }

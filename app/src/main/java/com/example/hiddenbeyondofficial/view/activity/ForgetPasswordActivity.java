@@ -46,11 +46,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 String password = binding.inputPassword.getText().toString();
                 String repass = binding.inputRepassword.getText().toString();
 
-                if (TextUtils.isEmpty(name)) {
-                    Utility.Notice.snack(view, Const.Error.name);
-                } else if (TextUtils.isEmpty(password)) {
-                    Utility.Notice.snack(view, Const.Error.password);
-                } else if (!repass.equals(password)) {
+                if (!repass.equals(password)) {
                     Utility.Notice.snack(view, Const.Error.notmatch);
                 } else {
                     userViewModel.updatePassword(name, password, view, ForgetPasswordActivity.this);
