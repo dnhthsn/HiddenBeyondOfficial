@@ -40,7 +40,7 @@ public interface Const {
         String phone = "Please write your phone...";
         String address = "Please write your address...";
         String information = "Wrong information";
-        String network = "Network Error: Please try again...";
+        String wrongPhone = "You have input wrong phone number...";
         String existed = "existed";
         String notexisted = "Not existed";
         String notmatch = "Not match with password";

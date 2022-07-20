@@ -1,5 +1,6 @@
 package com.example.hiddenbeyondofficial.viewmodel;
 
+import android.content.Context;
 import android.view.View;
 
 import androidx.lifecycle.MutableLiveData;
@@ -15,8 +16,8 @@ public class VideoViewModel extends ViewModel {
     private Repository repository;
     private MutableLiveData<List<Videos>> movies = new MutableLiveData<>();
 
-    public VideoViewModel() {
-        this.repository = new Repository();
+    public VideoViewModel(Context context) {
+        this.repository = new Repository(context);
     }
 
     public MutableLiveData<List<Videos>> getVideos() {

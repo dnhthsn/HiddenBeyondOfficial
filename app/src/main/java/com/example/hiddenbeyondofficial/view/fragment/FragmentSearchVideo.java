@@ -47,7 +47,7 @@ public class FragmentSearchVideo extends Fragment implements SearchVideoAdapter.
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        videoViewModel = new VideoViewModel();
+        videoViewModel = new VideoViewModel(getContext());
 
         videos = new ArrayList<>();
         filter = new ArrayList<>();

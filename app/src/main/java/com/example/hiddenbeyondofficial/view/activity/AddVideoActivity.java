@@ -32,7 +32,7 @@ public class AddVideoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_video);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_video);
-        videoViewModel = new VideoViewModel();
+        videoViewModel = new VideoViewModel(getApplicationContext());
 
         binding.addVideo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +42,7 @@ public class AddVideoActivity extends AppCompatActivity {
                 String video = binding.inputVideo.getText().toString();
                 String category = binding.videoCategory.getSelectedItem().toString();
 
-                Videos videos = new Videos(name, image, video, category);
+                Videos videos = new Videos(name, category, image, video);
                 videoViewModel.addVideo(videos, view);
 
                 binding.inputVideoName.setText("");
@@ -55,6 +55,7 @@ public class AddVideoActivity extends AppCompatActivity {
         binding.logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                StartActivity.starter(AddVideoActivity.this);
                 finish();
             }
         });

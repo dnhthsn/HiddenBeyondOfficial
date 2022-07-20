@@ -5,12 +5,14 @@ import androidx.databinding.DataBindingUtil;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.hiddenbeyondofficial.R;
 import com.example.hiddenbeyondofficial.control.local.SharedPreference;
 import com.example.hiddenbeyondofficial.databinding.ActivityInformationBinding;
@@ -48,9 +50,9 @@ public class InformationActivity extends AppCompatActivity {
         String uAddress = users.getAddress();
         String uGender = users.getGender();
 
-        binding.userName.setText("Name: " + uName);
+        binding.userName.setText(uName);
         binding.password.setText("Password: " + uPass);
-        binding.phoneNumber.setText("Phone number: " + uPhone);
+        binding.phoneNumber.setText(uPhone);
         binding.address.setText("Address: " + uAddress);
         binding.gender.setText("Gender: " + uGender);
 
@@ -74,34 +76,22 @@ public class InformationActivity extends AppCompatActivity {
             }
         });
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.
-                Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).
-                build();
-
-        GoogleSignInClient googleSignInClient= GoogleSignIn.getClient(InformationActivity.this,gso);
-
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null){
             String name = account.getDisplayName();
             String mail = account.getEmail();
 
-            binding.userName.setText("Name: " + name);
+            Glide.with(this).load(account.getPhotoUrl()).into(binding.avatar);
+            binding.userName.setText(name);
             binding.password.setText("");
             binding.phoneNumber.setText("Email: " + mail);
             binding.address.setText("");
             binding.gender.setText("");
+
             binding.editInfor.setVisibility(View.INVISIBLE);
+            binding.password.setVisibility(View.INVISIBLE);
+            binding.address.setVisibility(View.INVISIBLE);
+            binding.gender.setVisibility(View.INVISIBLE);
         }
-
-        binding.logOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-                LoginActivity.starter(InformationActivity.this);
-
-
-                googleSignInClient.signOut();
-            }
-        });
     }
 }

@@ -9,7 +9,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="yellow">#FFEB3B</color>
     <color name="grey">#7C7C78</color>
-    <color name="colorPrimary">#F44336</color>
-    <color name="colorPrimary2">#ED8F88</color>
-    <color name="itemNavigationColor">#F44336</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary2">#03A9F4</color>
+    <color name="itemNavigationColor">#3F51B5</color>
+    <color name="shadow">#7CBFBBBB</color>
+    <color name="shadow_black">#C1A6A1A1</color>
+    <color name="noclor">#00ACA2A1</color>
+    <color name="blue">#2196F3</color>
 </resources>

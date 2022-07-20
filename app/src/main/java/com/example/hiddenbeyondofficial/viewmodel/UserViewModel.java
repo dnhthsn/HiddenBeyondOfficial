@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.lifecycle.ViewModel;
+import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.hiddenbeyondofficial.R;
 import com.example.hiddenbeyondofficial.control.Repository;
@@ -31,7 +32,7 @@ public class UserViewModel extends ViewModel {
     private String message;
 
     public UserViewModel(Context context) {
-        this.repository = new Repository();
+        this.repository = new Repository(context);
         sharedPreference = new SharedPreference(context);
     }
 
@@ -55,7 +56,6 @@ public class UserViewModel extends ViewModel {
         } else {
             Users users = new Users(name, phone, password, address, gender);
             repository.addUser(users, view);
-            Utility.Notice.snack(view, Const.Success.created);
         }
     }
 
@@ -76,7 +76,7 @@ public class UserViewModel extends ViewModel {
         }
     }
 
-    public void updatePassword(String name, String password, View view, Context context){
+    public void updatePassword(String name, String password, String phone, View view, Context context){
         if (TextUtils.isEmpty(name)) {
             Utility.Notice.snack(view, Const.Error.name);
         } else if (TextUtils.isEmpty(password)) {
@@ -111,13 +111,14 @@ public class UserViewModel extends ViewModel {
                     Users users = new Users();
                     users.setName(name);
                     users.setPassword(password);
+                    users.setPhone(phone);
 
                     repository.updatePassword(users, view);
-                    LoginActivity.starter(context);
                 }
             });
 
             AlertDialog dialog = builder.create();
+            dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_white);
             dialog.show();
         }
     }

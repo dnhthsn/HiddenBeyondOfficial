@@ -23,7 +23,7 @@ public class AdminViewModel extends ViewModel {
     private SharedPreference sharedPreference;
 
     public AdminViewModel(Context context) {
-        this.repository = new Repository();
+        this.repository = new Repository(context);
         this.sharedPreference = new SharedPreference(context);
     }
 

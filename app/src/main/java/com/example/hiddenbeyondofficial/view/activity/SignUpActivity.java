@@ -40,13 +40,6 @@ public class SignUpActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up);
         userViewModel = new UserViewModel(this);
 
-        binding.clickBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
         binding.clickSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

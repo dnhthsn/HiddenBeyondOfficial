@@ -52,7 +52,7 @@ public class FragmentVideo extends Fragment implements CategoryAdapter.clickList
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        videoViewModel = new VideoViewModel();
+        videoViewModel = new VideoViewModel(getContext());
 
         List<Videos> homeCatListItem1 = new ArrayList<>();
         List<Videos> homeCatListItem2 = new ArrayList<>();

@@ -8,6 +8,11 @@ public class Admins implements Serializable {
     public Admins() {
     }
 
+    public Admins(String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
+
     public String getName() {
         return name;
     }

@@ -1,5 +1,6 @@
 package com.example.hiddenbeyondofficial.viewmodel;
 
+import android.content.Context;
 import android.view.View;
 
 import androidx.lifecycle.MutableLiveData;
@@ -16,8 +17,8 @@ public class NewsViewModel extends ViewModel {
     private Repository repository;
     private MutableLiveData<List<News>> news = new MutableLiveData<>();
 
-    public NewsViewModel() {
-        this.repository = new Repository();
+    public NewsViewModel(Context context) {
+        this.repository = new Repository(context);
     }
 
     public MutableLiveData<List<News>> getNews() {

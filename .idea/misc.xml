@@ -5,28 +5,34 @@
       <map>
         <entry key="app/src/main/res/drawable-v24/round_corner_image.xml" value="0.25462962962962965" />
         <entry key="app/src/main/res/drawable/circle_button.xml" value="0.25462962962962965" />
+        <entry key="app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.2351851851851852" />
+        <entry key="app/src/main/res/drawable/ic_baseline_female_24.xml" value="0.2351851851851852" />
         <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.22685185185185186" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2351851851851852" />
         <entry key="app/src/main/res/drawable/round_corner_button.xml" value="0.25462962962962965" />
+        <entry key="app/src/main/res/drawable/round_corner_nocolor.xml" value="0.3260416666666667" />
         <entry key="app/src/main/res/drawable/round_corner_white.xml" value="0.25462962962962965" />
         <entry key="app/src/main/res/drawable/selected.xml" value="0.22685185185185186" />
         <entry key="app/src/main/res/drawable/unselected.xml" value="0.22685185185185186" />
+        <entry key="app/src/main/res/font/font_title.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/activity_add_news.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_add_video.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_admin.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_edit_information.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_forget_password.xml" value="0.14447463768115942" />
+        <entry key="app/src/main/res/layout/activity_forget_password.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_information.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login_admin.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_play_video.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_search_video.xml" value="0.15070921985815602" />
-        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_start.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_video_detail.xml" value="0.14361702127659576" />
         <entry key="app/src/main/res/layout/activity_web_news.xml" value="0.16485507246376813" />
         <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.14447463768115942" />
         <entry key="app/src/main/res/layout/dialog.xml" value="0.14447463768115942" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_news.xml" value="0.14361702127659576" />
         <entry key="app/src/main/res/layout/fragment_search_news.xml" value="0.14361702127659576" />
         <entry key="app/src/main/res/layout/fragment_search_video.xml" value="0.165" />
@@ -37,6 +43,7 @@
         <entry key="app/src/main/res/layout/item_main_recycler.xml" value="0.14361702127659576" />
         <entry key="app/src/main/res/layout/item_news.xml" value="0.16485507246376813" />
         <entry key="app/src/main/res/layout/item_search_video.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/menu/item_main_menu.xml" value="0.2759259259259259" />
         <entry key="app/src/main/res/menu/item_menu.xml" value="0.18611111111111112" />
         <entry key="app/src/main/res/menu/item_movie_menu.xml" value="0.25555555555555554" />
       </map>

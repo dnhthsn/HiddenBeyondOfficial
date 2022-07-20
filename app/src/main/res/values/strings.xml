@@ -6,4 +6,8 @@
         <item>Legend</item>
         <item>Movie</item>
     </string-array>
+
+    <string name="facebook_app_id">421289299930048</string>
+    <string name="fb_login_protocol_scheme">fb421289299930048</string>
+    <string name="facebook_client_token">33477b4a84fd743a9815140ca6df4787</string>
 </resources>

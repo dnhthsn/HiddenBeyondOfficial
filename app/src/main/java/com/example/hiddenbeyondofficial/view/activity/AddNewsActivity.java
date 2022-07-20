@@ -31,7 +31,7 @@ public class AddNewsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_news);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_news);
-        newsViewModel = new NewsViewModel();
+        newsViewModel = new NewsViewModel(getApplicationContext());
 
         binding.addNews.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +52,7 @@ public class AddNewsActivity extends AppCompatActivity {
         binding.logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                StartActivity.starter(AddNewsActivity.this);
                 finish();
             }
         });

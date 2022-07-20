@@ -1,14 +1,23 @@
 package com.example.hiddenbeyondofficial.view.fragment;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +28,8 @@ import com.example.hiddenbeyondofficial.databinding.FragmentHomeBinding;
 import com.example.hiddenbeyondofficial.model.News;
 import com.example.hiddenbeyondofficial.util.Const;
 import com.example.hiddenbeyondofficial.view.activity.InformationActivity;
+import com.example.hiddenbeyondofficial.view.activity.LoginActivity;
+import com.example.hiddenbeyondofficial.view.activity.StartActivity;
 import com.example.hiddenbeyondofficial.view.activity.VideoDetailActivity;
 import com.example.hiddenbeyondofficial.view.adapter.CategoryAdapter;
 import com.example.hiddenbeyondofficial.view.adapter.MainRecyclerAdapter;
@@ -30,6 +41,9 @@ import com.example.hiddenbeyondofficial.view.adapter.NewsAdapter;
 import com.example.hiddenbeyondofficial.view.adapter.SearchVideoAdapter;
 import com.example.hiddenbeyondofficial.viewmodel.NewsViewModel;
 import com.example.hiddenbeyondofficial.viewmodel.VideoViewModel;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,8 +71,8 @@ public class FragmentHome extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        videoViewModel = new VideoViewModel();
-        newsViewModel = new NewsViewModel();
+        videoViewModel = new VideoViewModel(getContext());
+        newsViewModel = new NewsViewModel(getContext());
 
         List<Videos> homeCatListItem1 = new ArrayList<>();
         List<Videos> homeCatListItem2 = new ArrayList<>();
@@ -117,9 +131,11 @@ public class FragmentHome extends Fragment {
         setNewRecycler(allNews);
 
         binding.information.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.Q)
             @Override
             public void onClick(View view) {
-                InformationActivity.starter(getContext());
+                //InformationActivity.starter(getContext());
+                showMenu();
             }
         });
     }
@@ -137,5 +153,35 @@ public class FragmentHome extends Fragment {
         newsAdapter = new NewsAdapter();
         newsAdapter.setNews(news);
         binding.newList.setAdapter(newsAdapter);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    public void showMenu(){
+        PopupMenu popupMenu = new PopupMenu(getContext(), binding.information);
+        popupMenu.setForceShowIcon(true);
+        popupMenu.setGravity(Gravity.END);
+        popupMenu.getMenuInflater().inflate(R.menu.item_main_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.menu_info:
+                        InformationActivity.starter(getContext());
+                        break;
+                    case R.id.menu_log_out:
+                        GoogleSignInOptions gso = new GoogleSignInOptions.
+                                Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).
+                                build();
+
+                        GoogleSignInClient googleSignInClient= GoogleSignIn.getClient(getContext(),gso);
+
+                        StartActivity.starter(getContext());
+                        googleSignInClient.signOut();
+                        break;
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
     }
 }

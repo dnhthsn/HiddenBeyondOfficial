@@ -1,11 +1,13 @@
 package com.example.hiddenbeyondofficial.control;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.hiddenbeyondofficial.control.local.DatabaseVideo;
 import com.example.hiddenbeyondofficial.control.rest.Callback;
 import com.example.hiddenbeyondofficial.model.Admins;
 import com.example.hiddenbeyondofficial.model.News;
@@ -27,219 +29,120 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Repository {
-    private FirebaseDatabase db;
-    private DatabaseReference databaseReference;
+    private DatabaseVideo databaseVideo;
 
-    public Repository() {
-        this.db = FirebaseDatabase.getInstance();
-        this.databaseReference = db.getReference();
+    public Repository(Context context) {
+        this.databaseVideo = new DatabaseVideo(context);
     }
 
     public void getVideo(Callback callback) {
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<Videos> list = new ArrayList<>();
-                Videos videos;
-                for (DataSnapshot data : snapshot.getChildren()) {
-                    videos = data.getValue(Videos.class);
-                    list.add(videos);
-                }
-                callback.getVideo(list);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-        databaseReference.child(Const.Database.video).addValueEventListener(postListener);
+        Cursor cursor = databaseVideo.getVideo();
+        Videos videos;
+        List<Videos> list = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            String name = cursor.getString(0);
+            String category = cursor.getString(1);
+            String image = cursor.getString(2);
+            String video = cursor.getString(3);
+            videos = new Videos(name, category, image, video);
+            list.add(videos);
+        }
+        callback.getVideo(list);
+        cursor.moveToFirst();
+        cursor.close();
     }
 
     public void getAdmin(Callback callback) {
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<Admins> list = new ArrayList<>();
-                Admins admins;
-                for (DataSnapshot data : snapshot.getChildren()) {
-                    admins = data.getValue(Admins.class);
-                    list.add(admins);
-                }
-                callback.getAdmin(list);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-        databaseReference.child(Const.Database.admin).addValueEventListener(postListener);
+        Cursor cursor = databaseVideo.getAdmin();
+        Admins admins;
+        List<Admins> list = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            String name = cursor.getString(0);
+            String password = cursor.getString(1);
+            admins = new Admins(name, password);
+            list.add(admins);
+        }
+        callback.getAdmin(list);
+        cursor.moveToFirst();
+        cursor.close();
     }
 
     public void getUser(Callback callback) {
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<Users> list = new ArrayList<>();
-                Users users;
-                for (DataSnapshot data : snapshot.getChildren()) {
-                    users = data.getValue(Users.class);
-                    list.add(users);
-                }
-                callback.getUser(list);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-        databaseReference.child(Const.Database.user).addValueEventListener(postListener);
+        Cursor cursor = databaseVideo.getUser();
+        Users users;
+        List<Users> list = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            String name = cursor.getString(0);
+            String phone = cursor.getString(1);
+            String password = cursor.getString(2);
+            String address = cursor.getString(3);
+            String gender = cursor.getString(4);
+            users = new Users(name, phone, password, address, gender);
+            list.add(users);
+        }
+        callback.getUser(list);
+        cursor.moveToFirst();
+        cursor.close();
     }
 
-    public void getNews(Callback callback){
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<News> list = new ArrayList<>();
-                News news;
-                for (DataSnapshot data : snapshot.getChildren()) {
-                    news = data.getValue(News.class);
-                    list.add(news);
-                }
-                callback.getNew(list);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-        databaseReference.child(Const.Database.news).addValueEventListener(postListener);
+    public void getNews(Callback callback) {
+        Cursor cursor = databaseVideo.getNews();
+        News news;
+        List<News> list = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            String name = cursor.getString(0);
+            String image = cursor.getString(1);
+            String content = cursor.getString(2);
+            news = new News(name, image, content);
+            list.add(news);
+        }
+        callback.getNew(list);
+        cursor.moveToFirst();
+        cursor.close();
     }
 
     public void addUser(Users users, View view) {
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.child(Const.Database.user).child(users.getName()).exists()) {
-                    HashMap<String, Object> userdataMap = new HashMap<>();
-                    userdataMap.put(Const.Database.name, users.getName());
-                    userdataMap.put(Const.Database.password, users.getPassword());
-                    userdataMap.put(Const.Database.phone, users.getPhone());
-                    userdataMap.put(Const.Database.address, users.getAddress());
-                    userdataMap.put(Const.Database.gender, users.getGender());
-
-                    databaseReference.child(Const.Database.user).child(users.getName()).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                LoginActivity.starter(view.getContext());
-                            } else {
-                                Utility.Notice.snack(view, Const.Error.network);
-                            }
-                        }
-                    });
-                } else {
-                    Utility.Notice.snack(view, Const.Error.existed);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        if (!databaseVideo.checkUser(users.getName()) && !databaseVideo.checkPhoneNumber(users.getPhone())){
+            databaseVideo.addUser(users);
+            LoginActivity.starter(view.getContext());
+        } else {
+            Utility.Notice.snack(view, Const.Error.existed);
+        }
     }
 
     public void addVideo(Videos videos, View view) {
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.child(Const.Database.video).child(videos.getName()).exists()) {
-                    HashMap<String, Object> videoDatamap = new HashMap<>();
-                    videoDatamap.put(Const.Database.name, videos.getName());
-                    videoDatamap.put(Const.Database.image, videos.getImage());
-                    videoDatamap.put(Const.Database.videos, videos.getVideo());
-                    videoDatamap.put(Const.Database.category, videos.getCategory());
-
-                    databaseReference.child(Const.Database.video).child(videos.getName()).updateChildren(videoDatamap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Utility.Notice.snack(view, Const.Success.created);
-                            } else {
-                                Utility.Notice.snack(view, Const.Error.network);
-                            }
-                        }
-                    });
-                } else {
-                    Utility.Notice.snack(view, Const.Error.existed);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        if (!databaseVideo.checkVideo(videos.getName())){
+            databaseVideo.addVideo(videos);
+            Utility.Notice.snack(view, Const.Success.created);
+        } else {
+            Utility.Notice.snack(view, Const.Error.existed);
+        }
     }
 
     public void addNews(News news, View view) {
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.child(Const.Database.news).child(news.getName()).exists()) {
-                    HashMap<String, Object> videoDatamap = new HashMap<>();
-                    videoDatamap.put(Const.Database.name, news.getName());
-                    videoDatamap.put(Const.Database.image, news.getImage());
-                    videoDatamap.put(Const.Database.content, news.getContent());
-
-                    databaseReference.child(Const.Database.news)
-                            .child(news.getName())
-                            .updateChildren(videoDatamap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Utility.Notice.snack(view, Const.Success.created);
-                            } else {
-                                Utility.Notice.snack(view, Const.Error.network);
-                            }
-                        }
-                    });
-                } else {
-                    Utility.Notice.snack(view, Const.Error.existed);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        if (!databaseVideo.checkNews(news.getName())){
+            databaseVideo.addNews(news);
+            Utility.Notice.snack(view, Const.Success.created);
+        } else {
+            Utility.Notice.snack(view, Const.Error.existed);
+        }
     }
 
     public void updateUser(Users users) {
-        databaseReference.child(Const.Database.user).child(users.getName()).setValue(users);
+        if (databaseVideo.checkUser(users.getName())){
+            databaseVideo.updateUser(users);
+        }
     }
 
     public void updatePassword(Users users, View view) {
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.child(Const.Database.user).child(users.getName()).exists()) {
-                    Utility.Notice.snack(view, Const.Success.update);
-                    databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.password).setValue(users.getPassword());
-                } else {
-                    Utility.Notice.snack(view, Const.Error.notexisted);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        if (!databaseVideo.checkUser(users.getName())){
+            Utility.Notice.snack(view, Const.Error.notexisted);
+        }
+        else if (databaseVideo.checkUserAndPhone(users.getPhone(), users.getName())){
+            databaseVideo.updateUserPassword(users);
+            LoginActivity.starter(view.getContext());
+        } else {
+            Utility.Notice.snack(view, Const.Error.wrongPhone);
+        }
     }
 }

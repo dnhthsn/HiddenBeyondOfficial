@@ -45,11 +45,12 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 String name = binding.inputName.getText().toString();
                 String password = binding.inputPassword.getText().toString();
                 String repass = binding.inputRepassword.getText().toString();
+                String phone = binding.inputPhone.getText().toString();
 
                 if (!repass.equals(password)) {
                     Utility.Notice.snack(view, Const.Error.notmatch);
                 } else {
-                    userViewModel.updatePassword(name, password, view, ForgetPasswordActivity.this);
+                    userViewModel.updatePassword(name, password, phone, view, ForgetPasswordActivity.this);
                 }
             }
         });

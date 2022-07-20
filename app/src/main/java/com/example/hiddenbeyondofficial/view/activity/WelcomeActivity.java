@@ -24,15 +24,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_welcome);
 
-        new Thread(){
-            public void run(){
-                try {
-                    sleep(5000);
-                    LoginActivity.starter(WelcomeActivity.this);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
+        new Handler().postDelayed(() -> {
+            StartActivity.starter(WelcomeActivity.this);
+        }, 5000);
     }
 }
